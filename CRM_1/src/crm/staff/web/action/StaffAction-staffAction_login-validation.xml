@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- 1 登录名校验 -->
+	<field name="loginName">
+		<!-- 必填 -->
+		<field-validator type="requiredstring">
+			<message>登录名不能为空</message>
+		</field-validator>
+		<!-- 长度 -->
+		<field-validator type="stringlength">
+			<param name="maxLength">12</param>
+			<param name="minLength">2</param>
+			<message>登录名必须在${minLength}-${maxLength}字符之间</message>
+		</field-validator>
+	</field>
+	<!-- 2 登录密码校验 -->
+	<field name="loginPwd">
+		<!-- 必填 -->
+		<field-validator type="requiredstring">
+			<message>登录密码不能为空</message>
+		</field-validator>
+		<!-- 长度 -->
+		<field-validator type="stringlength">
+			<param name="maxLength">16</param>
+			<param name="minLength">2</param>
+			<message>登录密码必须在${minLength}-${maxLength}字符之间</message>
+		</field-validator>
+	</field>
+
+</validators>

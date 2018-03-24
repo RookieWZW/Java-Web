@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+	<struts>
+	<!-- 配置用户的 -->
+	<package name="sta" namespace="/staff" extends="common">
+		<action name="staffAction_*" class="crm.staff.web.action.StaffAction" method="{1}">
+			<!-- 1 成功 ,重定向到首页-->
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">homeAction</param>
+			</result>
+			<!-- 2 需要登录 -->
+			<result name="login">/WEB-INF/pages/login.jsp</result>
+			<!-- 3 查询所有员工 -->
+			<result name="findAll">/WEB-INF/pages/staff/listStaff.jsp</result>
+			<!-- 4修改密码input -->
+			<result name="pwdInput">/WEB-INF/pages/staff/updPwd.jsp</result>
+			<!-- 5 修改密码成功 -->
+			<result name="editPassword" type="redirectAction">staffAction_logout</result>
+			<!-- 6 编辑前 -->
+			<result name="preEdit">/WEB-INF/pages/staff/editStaff.jsp</result>
+			<!-- 7编辑-->
+			<result name="edit" type="redirectAction">staffAction_findAll</result>
+			<!-- 8 添加前 -->
+			<result name="preAdd">/WEB-INF/pages/staff/addStaff.jsp</result>
+			<!-- 9编辑-->
+			<result name="add" type="redirectAction">staffAction_findAll</result>
+		</action>
+	</package>
+
+</struts>

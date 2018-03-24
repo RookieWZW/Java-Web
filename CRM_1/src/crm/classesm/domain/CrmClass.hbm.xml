@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="crm.classesm.domain.CrmClass" table="crm_class">
+          <id name="classId" type="java.lang.String" length="50">
+            <generator class="uuid" />
+        </id>
+        <!--  -->
+        <many-to-one name="crmCourseType" column="courseTypeId" class="crm.coursetype.domain.CrmCourseType" />
+        
+        <property name="name" length="50"></property>
+        <property name="beginTime" >
+            <column name="beginTime" sql-type="datetime" />
+        </property>
+        <property name="endTime" >
+            <column name="endTime"  sql-type="datetime"  />
+        </property>
+        
+        <property name="status" length="20" ></property>
+        <property name="totalCount"></property>
+        <property name="upgradeCount"></property>
+        
+        <property name="changeCount"></property>
+        <property name="runoffCount"></property>
+        <property name="remark" length="500"></property>
+        
+        <set name="crmBeforeStationSet" inverse="true">
+            <key column="beforeClassId"></key>
+            <one-to-many class="crm.station.domain.CrmStation" />
+        </set>
+        
+        <set name="crmAfterStationSet" inverse="true">
+            <key column="afterClassId"></key>
+            <one-to-many class="crm.station.domain.CrmStation" />
+        </set>
+        
+        
+        <set name="crmGraduateSet" inverse="true">
+            <key column="classId"></key>
+            <one-to-many class="crm.graduate.domain.CrmGraduate" />
+        </set>
+        <set name="crmStudentSet" inverse="true">
+            <key column="classId"></key>
+            <one-to-many class="crm.student.domain.CrmStudent" />
+        </set>
+        
+        
+        <property name="uploadPath" length="200"></property>
+        <property name="uploadFilename" length="100"></property>
+        <property name="uploadTime" >
+            <column name="uploadTime" sql-type="datetime" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

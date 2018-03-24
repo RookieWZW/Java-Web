@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="crm.student.domain.CrmStudent" table="crm_student">
+		<id name="studentId">
+			<generator class="uuid" />
+		</id>
+
+		<property name="name" />
+		<property name="gender" />
+		<property name="mustTuition" />
+		<property name="actualTuition" />
+
+		<property name="telephone" />
+		<property name="identity" />
+		<many-to-one name="crmClass" class="crm.classesm.domain.CrmClass"
+			column="classId"></many-to-one>
+
+		<property name="qq"></property>
+		<property name="email"></property>
+		<property name="school"></property>
+		<property name="education"></property>
+		<property name="professional"></property>
+
+		<property name="status"></property>
+		<property name="identityAddress"></property>
+		<property name="address"></property>
+
+		<property name="remark"></property>
+		<property name="homeTelephone"></property>
+		<property name="homeUser"></property>
+
+		<many-to-one name="crmRefer" class="crm.refer.domain.CrmRefer"
+			unique="true" column="referId"></many-to-one>
+
+		<set name="crmStationSet">
+			<key column="studentId"></key>
+			<one-to-many class="crm.station.domain.CrmStation" />
+		</set>
+		<set name="runOffSet">
+			<key column="studentId"></key>
+			<one-to-many class="crm.runoff.domain.CrmRunOff" />
+		</set>
+
+		<one-to-one name="crmGraduate"
+			class="crm.graduate.domain.CrmGraduate" foreign-key="studentId"></one-to-one>
+
+
+	</class>
+</hibernate-mapping>

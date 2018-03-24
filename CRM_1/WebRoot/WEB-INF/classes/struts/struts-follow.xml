@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<package name="fol" namespace ="/follow" extends = "common">
+		<action name ="followAction_*" class = "crm.follow.web.action.FollowAction" method = "{1}">
+			<!-- 2添加或编辑前 -->
+			<result name="preAddOrEdit">/WEB-INF/pages/follow/addOrEditFollow.jsp</result>
+			<!-- 3添加或编辑 -->
+			<result name="addOrEdit" type="redirectAction">
+				<param name="namespace">/refer</param>
+				<param name="actionName">referAction_findById?referId=${crmRefer.referId}</param>
+			</result>
+		</action>
+	</package>
+</struts>

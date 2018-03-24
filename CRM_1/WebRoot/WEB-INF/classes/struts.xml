@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.ui.theme" value="simple"></constant>
+	
+	
+	<package name="common" namespace="/" extends ="json-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="crm.web.interceptor.LoginInterceptor"></interceptor>
+			
+			<interceptor-stack name="crmStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				
+				<interceptor-ref name="loginInterceptor">
+					<param name="excludeMethods">login,register</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		
+		
+		<default-interceptor-ref name="crmStack"></default-interceptor-ref>
+		
+		
+		
+		<global-results>
+			<result name ="nonLogin">/WEB-INF/pages/login.jsp</result>
+			<result name="error">/WEB-INF/pages/error.jsp</result>
+			<result name="input">/WEB-INF/pages/error.jsp</result>
+		</global-results>
+		
+		
+		
+		
+		<action name="uiAction_*_*">
+			<result>/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
+		
+		<action name = "homeAction" class = "crm.web.action.HomeAction">
+			<result>/WEB-INF/pages/frame.jsp</result>
+		</action>
+	</package>
+	
+	<!-- * 员工 -->
+	<include file="struts/struts-staff.xml"></include>
+	<!-- * 职务 -->
+	<include file="struts/struts-post.xml"></include>
+	<!-- * 部门 -->
+	<include file="struts/struts-department.xml"></include>
+	<!-- * 课程类别  -->
+	<include file="struts/struts-coursetype.xml"></include>
+	<!-- * 班级 -->
+	<include file="struts/struts-class.xml"></include>
+	<!-- * 咨询 -->
+	<include file="struts/struts-refer.xml"></include>
+	<!-- * 跟踪-->
+	<include file="struts/struts-follow.xml"></include>
+	<!-- * 学生 -->
+	<include file="struts/struts-student.xml"></include>
+	<!-- * 转班/升级 -->
+	<include file="struts/struts-station.xml"></include>
+	<!-- * 丢失-->
+	<include file="struts/struts-runoff.xml"></include>
+	<!-- * 就业（毕业生）-->
+	<include file="struts/struts-graduate.xml"></include>
+	
+	
+</struts>

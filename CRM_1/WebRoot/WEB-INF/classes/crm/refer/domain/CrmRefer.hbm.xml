@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name = "crm.refer.domain.CrmRefer" table = "crm_refer">
+		<id name = "referId">
+			<generator class="uuid"></generator>
+		</id>
+		 <property name="name"></property>
+        <property name="telephone"></property>
+        <property name="qq"></property>
+        <property name="createDate">
+        	<column name="createDate" sql-type="datetime"></column>
+        </property>
+        
+        
+        <many-to-one name="crmStaff" class = "crm.staff.domain.CrmStaff" column = "staffId"></many-to-one>
+        
+         <property name="intentionLevel" length="50" />
+         <many-to-one name="crmClass" class = "crm.classesm.domain.CrmClass" column = "classId"></many-to-one>
+         <many-to-one name="crmCourseType" class = "crm.coursetype.domain.CrmCourseType" column = "courseTypeId"></many-to-one>
+         
+		<property name="source" length="100" />
+        <property name="status" length="10" />
+        <property name="remark" length="200" />
+        
+        <set name="crmFollowSet" order-by = "followTime desc">
+        	<key column = "referId"></key>
+        	<one-to-many class = "crm.follow.domain.CrmFollow"/>
+        </set>
+        
+        <one-to-one name="crmStudent" class = "crm.student.domain.CrmStudent" foreign-key="referId" />
+	</class>
+</hibernate-mapping>

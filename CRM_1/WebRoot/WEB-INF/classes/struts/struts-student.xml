@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 配置用户的 -->
+	<package name="stu" namespace="/student" extends="common">
+		<action name="studentAction_*" class="crm.student.web.action.StudentAction" method="{1}">
+			<!-- 1 查询所有 -->
+			<result name="findAll">/WEB-INF/pages/student/listStudent.jsp</result>
+			<!-- 2添加或编辑前 -->
+			<result name="preAddOrEdit">/WEB-INF/pages/student/addOrEditStudent.jsp</result>
+			<!-- 3添加或编辑 -->
+			<result name="addOrEdit" type="redirectAction">studentAction_findAll</result>
+			<!-- 4通过id查询 -->
+			<result name="findById">/WEB-INF/pages/student/queryStudent.jsp</result>
+			<!-- 5ajax 获得所有学生 -->
+			<result name="ajaxGetStudent" type="json">
+				<param name="root">allStudent</param>
+				<param name="includeProperties">
+					\[\d\]\.studentId,
+					\[\d\]\.name
+				</param>
+			</result>
+		</action>
+	</package>
+
+</struts>

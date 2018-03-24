@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "crm.staff.domain.CrmStaff" table = "crm_staff">
+		<id name ="staffId">
+			<generator class="uuid"></generator>
+		</id>
+		
+		 <property name="loginName" length="100" />
+        <property name="loginPwd" length="100" />
+        <property name="staffName" length="100" />
+        
+        <property name="gender" length="20" />
+        <property name="onDutyDate" >
+            <column name="onDutyDate" sql-type="datetime"/>
+        </property>
+        
+         <many-to-one name="crmPost" class="crm.post.domain.CrmPost" column="postId"></many-to-one>
+        
+        <set name="crmReferSet" inverse="true">
+            <key column="staffId"></key>
+            <one-to-many class="crm.refer.domain.CrmRefer" />
+        </set>
+        <set name="crmFollowSet" inverse="true">
+            <key column="staffId"></key>
+            <one-to-many class="crm.follow.domain.CrmFollow" />
+        </set>
+        <set name="crmRunOffset" inverse="true">
+            <key column="staffId"></key>
+            <one-to-many class="crm.runoff.domain.CrmRunOff" />
+        </set>
+	</class>
+</hibernate-mapping>

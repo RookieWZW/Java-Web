@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<package name="ref" namespace = "/refer" extends = "common">
+		<action name="referAction_*" class = "crm.refer.web.action.ReferAction" method = "{1}">
+			<!-- 1 查询所有 -->
+			<result name="findAll">/WEB-INF/pages/refer/listRefer.jsp</result>
+			<!-- 2添加或编辑前 -->
+			<result name="preAddOrEdit">/WEB-INF/pages/refer/addOrEditRefer.jsp</result>
+			<!-- 3添加或编辑 -->
+			<result name="addOrEdit" type="redirectAction">referAction_findAll?status=${status}</result>
+			<!-- 4通过id查询 -->
+			<result name="findById">/WEB-INF/pages/refer/queryRefer.jsp</result>
+			<!-- 5添加前 -->
+			<result name="preAdd">/WEB-INF/pages/refer/addRefer.jsp</result>
+			<!-- 6添加 -->
+			<result name="add" type="redirectAction">referAction_findAll?status=1</result>
+			<!-- 7添加前 -->
+			<result name="preEdit">/WEB-INF/pages/refer/editRefer.jsp</result>
+			<!-- 8添加 -->
+			<result name="edit" type="redirectAction">referAction_findAll?status=1</result>
+			<!-- 9入学编班前 -->
+			<result name="preAddStudent">/WEB-INF/pages/refer/addStudent.jsp</result>
+			<!-- 10 编班 -->
+			<result name="addStudent" type="chain">
+				 <param name="actionName">studentAction_preAddOrEdit</param>
+             	<param name="namespace">/student</param>
+			</result>
+		</action>
+	</package>
+</struts>

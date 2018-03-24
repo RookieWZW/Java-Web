@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "crm.station.domain.CrmStation" table = "crm_station">
+		  <id name="stationId" >
+            <generator class="uuid" />
+        </id>
+        
+        <many-to-one name="crmStudent" class="crm.student.domain.CrmStudent" column="studentId"></many-to-one>
+        <property name="flag"></property>
+        <many-to-one name="crmStaff" class="crm.staff.domain.CrmStaff" column="staffId"></many-to-one>
+        
+        <property name="createDate" >
+            <column name="createDate" sql-type="datetime" />
+        </property>
+        <many-to-one name="beforeClass" class="crm.classesm.domain.CrmClass" column="beforeClassId">
+        </many-to-one>
+        <many-to-one name="afterClass" class="crm.classesm.domain.CrmClass" column="afterClassId">
+        </many-to-one>
+	</class>
+</hibernate-mapping>
+
+

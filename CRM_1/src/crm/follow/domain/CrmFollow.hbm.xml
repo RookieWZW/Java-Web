@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name = "crm.follow.domain.CrmFollow">
+		<id name = "followId">
+			<generator class="uuid"></generator>
+		</id>
+		<property name="followTime">
+			<column name = "followTime" sql-type="datetime"></column>
+		</property>
+		
+		<property name = "content" length = "1000"></property>
+		
+		<many-to-one name="crmStaff" class = "crm.staff.domain.CrmStaff" column = "staffId"></many-to-one>
+		
+		<many-to-one name="crmRefer" class = "crm.refer.domain.CrmRefer" column = "referId"></many-to-one>
+	</class>
+</hibernate-mapping>

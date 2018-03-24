@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="gra" namespace="/graduate" extends="common">
+		<action name="graduateAction_*" class="crm.graduate.web.action.GraduateAction"
+			method="{1}">
+			<!-- 1 查询所有 -->
+			<result name="findAll">/WEB-INF/pages/graduate/listGraduate.jsp</result>
+			<!-- 2 添加或编辑前 -->
+			<result name="preAddOrEdit">/WEB-INF/pages/graduate/addOrEditGraduate.jsp
+			</result>
+			<!-- 3 添加或编辑 -->
+			<result name="addOrEdit" type="redirectAction">
+				<param name="namespace">/graduate</param>
+				<param name="actionName">graduateAction_findAll</param>
+			</result>
+		</action>
+	</package>
+</struts>

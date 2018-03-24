@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 配置用户的 -->
+	<package name="stat" namespace="/station" extends="common">
+		<action name="stationAction_*" class="crm.station.web.action.StationAction" method="{1}">
+			<!-- 1 添加 -->
+			<result name="add" type="redirectAction">
+				<param name="namespace">/student</param>
+				<param name="actionName">studentAction_findById?studentId=${crmStudent.studentId}</param>
+			</result>
+			<!-- 2 查询所有 -->
+			<result name="findAll">/WEB-INF/pages/station/listStation.jsp</result>
+			<!-- 3 升级/转班 操作前 -->
+			<result name="preEditStation">/WEB-INF/pages/station/editStation.jsp</result>
+		</action>
+	</package>
+
+</struts>

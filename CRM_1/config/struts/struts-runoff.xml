@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="run" namespace = "/runoff" extends = "common">
+		<action name="runoffAction_*" class ="crm.runoff.web.action.RunOffAction" method = "{1}">
+						<!-- 1 查询所有 -->
+			<result name="preAdd">/WEB-INF/pages/runoff/addRunoff.jsp</result>
+			<!-- 2 添加 -->
+			<result name="add" type="redirectAction">
+				<param name="namespace">/student</param>
+				<param name="actionName">studentAction_findById?studentId=${crmStudent.studentId}</param>
+			</result>
+			<!-- 3 查询所有 -->
+			<result name="findAll">/WEB-INF/pages/runoff/listRunoff.jsp</result>
+			
+		</action>
+	</package>
+</struts>

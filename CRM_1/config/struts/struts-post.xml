@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<package name="pos" namespace="/post" extends="common">
+		<action name="postAction_*" class = "crm.post.web.action.PostAction" method = "{1}">
+			<result name="ajaxGetPostion" type="json">
+				<!-- struts 通过 root 设置名称，从栈顶获得数据 
+					* 默认情况，将获得所有数据都生成json，可以使用 includeProperties属性设置只包含指定的内容。
+					* allPost 栈顶的数据为List集合，遍历时只有下标，需要通过[\d]匹配每一个遍历项。例如：[0]  [1]  [2]
+					** 每一个匹配的内容都表示的集合中的一个对象CrmPost，此时只需要对象中 名称和id，所以 [0].postName 或 [0].postId ,只能匹配一个
+					** 需要匹配遍历所有 [\d].postName 和 [\d].postId ,但 [ ]  . 在3个符号在正则表达式被使用了。
+					** 所以需要转移 \[    \]     \.
+					** 多个属性使用逗号分隔
+				-->
+				<param name="root">allPost</param>
+				<param name="includeProperties">
+					\[\d\]\.postId,
+					\[\d\]\.postName
+				</param>
+			</result>
+				<!-- 2 查询所有 -->
+			<result name="findAll">/WEB-INF/pages/post/listPost.jsp</result>
+			<!-- 3添加或编辑前 -->
+			<result name="preAddOrEdit">/WEB-INF/pages/post/addOrEditPost.jsp</result>
+			<!-- 4添加或编辑 -->
+			<result name="addOrEdit" type="redirectAction">postAction_findAll</result>
+		</action>
+	
+	</package>
+	
+</struts>

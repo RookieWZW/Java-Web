@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="cla" namespace="/classesm" extends="common">
+
+		<action name="classAction_*" class="crm.classesm.web.action.ClassAction"
+			method="{1}">
+			<!-- 1查询所有 -->
+			<result name="findAll">/WEB-INF/pages/classesm/listClass.jsp</result>
+			<!-- 2添加或编辑前 -->
+			<result name="preAddOrEdit">/WEB-INF/pages/classesm/addOrEditClass.jsp
+			</result>
+			<!-- 3添加或编辑 -->
+			<result name="addOrEdit" type="redirectAction">classAction_findAll</result>
+			<!-- 4通过id查询 -->
+			<result name="findById">/WEB-INF/pages/classesm/viewClass.jsp</result>
+			<!-- 5 ajax 通过课程类别 查询 班级 -->
+			<result name="ajaxGetClass" type="json">
+				<param name="root">allClass</param>
+				<param name="includeProperties">
+					\[\d\]\.classId,
+					\[\d\]\.name
+				</param>
+			</result>
+			<!-- 6 上传前 -->
+			<result name="preUpload">/WEB-INF/pages/classesm/uploadClass.jsp</result>
+			<!-- 7上传 -->
+			<result name="upload" type="redirectAction">classAction_findAll</result>
+			<!-- 8下载 -->
+			<result name="download" type="stream">
+				<param name="inputName">target</param>
+				<param name="contentDisposition">attachment;filename=${downloadFileName}</param>
+			</result>
+		</action>
+	</package>
+</struts>

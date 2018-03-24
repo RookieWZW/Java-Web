@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="dep" namespace="/department" extends="common">
+		
+		<action name="departmentAction_*" class="crm.department.web.action.DepartmentAction"
+			method="{1}">
+			<!-- 1 查询所有 -->
+			<result name="findAll">/WEB-INF/pages/department/listDepartment.jsp
+			</result>
+			<!-- 2 添加或编辑前 -->
+			<result name="preAddOrEdit">/WEB-INF/pages/department/addOrEditDepartment.jsp
+			</result>
+			<!-- 3添加或编辑前 -->
+			<result name="addOrEdit" type="redirectAction">departmentAction_findAll
+			</result>
+
+		</action>
+	</package>
+</struts>

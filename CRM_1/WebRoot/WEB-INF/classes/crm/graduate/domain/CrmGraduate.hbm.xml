@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name = "crm.graduate.domain.CrmGraduate" table = "crm_graduate">
+		<id name = "graduateId">
+			<generator class="uuid"></generator>
+		</id>
+		
+		<many-to-one name="crmStudent" class = "crm.student.domain.CrmStudent" unique="true" column = "studentId"></many-to-one>
+		
+		 <property name="companyName" length="50" />
+        <property name="salary" length="50" />
+        
+        
+        <property name="post" length="50" />
+        <property name="entryTime">
+            <column name="entryTime"  sql-type="datetime" />
+        </property>
+        <property name="remark" length="200" />
+	</class>
+</hibernate-mapping>
