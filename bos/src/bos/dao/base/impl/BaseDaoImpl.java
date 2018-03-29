@@ -18,18 +18,16 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import bos.dao.base.BaseDao;
+import bos.utils.PageBean;
 
 
-/** 
-* @ClassName: BaseDaoImpl 
-* @Description: TODO(这里用一句话描述这个类的作用) 
-* @author RookieWangZhiWei
-* @date 2018年3月25日 下午2:22:48 
-*  
-*/
+
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 	
 	
@@ -131,6 +129,42 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 			query.setParameter(i++, arg);
 		}
 		query.executeUpdate();
+	}
+
+	/*
+	* Title: pageQuery
+	*Description: 
+	* @param pageBean 
+	* @see bos.dao.base.BaseDao#pageQuery(bos.utils.PageBean) 
+	*/
+	public void pageQuery(PageBean pageBean) {
+		int currentPage = pageBean.getCurrentPage();
+		int pageSize = pageBean.getPageSize();
+		DetachedCriteria detachedCriteria = pageBean.getDetachedCriteria();
+		//总数据量----select count(*) from bc_staff
+		//改变Hibernate框架发出的sql形式
+		detachedCriteria.setProjection(Projections.rowCount());//select count(*) from bc_staff
+		List<Long> list = this.getHibernateTemplate().findByCriteria(detachedCriteria);
+		Long total = list.get(0);
+		pageBean.setTotal(total.intValue());//设置总数据量
+		detachedCriteria.setProjection(null);//修改sql的形式为select * from ....
+		//重置表和类的映射关系
+		detachedCriteria.setResultTransformer(DetachedCriteria.ROOT_ENTITY);
+		//当前页展示的数据集合
+		int firstResult = (currentPage - 1) * pageSize;
+		int maxResults = pageSize;
+		List rows = this.getHibernateTemplate().findByCriteria(detachedCriteria, firstResult, maxResults);
+		pageBean.setRows(rows);
+	}
+	/*
+	* Title: saveOrUpdate
+	*Description: 
+	* @param t 
+	* @see bos.dao.base.BaseDao#saveOrUpdate(java.lang.Object) 
+	*/
+	public void saveOrUpdate(T t) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().saveOrUpdate(t);
 	}
 
 

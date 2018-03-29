@@ -11,6 +11,8 @@ package bos.dao.base;
 import java.io.Serializable;
 import java.util.List;
 
+import bos.utils.PageBean;
+
 /** 
 * @ClassName: BaseDao 
 * @Description: TODO(这里用一句话描述这个类的作用) 
@@ -23,7 +25,9 @@ public interface BaseDao<T> {
 	public void delete(T t);
 	
 	public void update(T t);
+	public void saveOrUpdate(T t);
 	public T findById(Serializable id);
 	public List<T> findAll();
 	public void executeUpdate(String queryName,Object...objects);
+	public void pageQuery(PageBean pageBean);
 }

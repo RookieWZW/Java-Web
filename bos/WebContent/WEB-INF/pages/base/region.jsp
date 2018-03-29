@@ -26,6 +26,7 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.ocupload-1.1.2.js"></script>
 <script type="text/javascript">
 	function doAdd(){
 		$('#addRegionWindow').window("open");
@@ -110,7 +111,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/region.json",
+			url : "${pageContext.request.contextPath}/regionAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -132,6 +133,23 @@
 	function doDblClickRow(){
 		alert("双击表格数据...");
 	}
+</script>
+<script type="text/javascript">
+	$(function(){
+		$("#button-import").upload({
+            action: '${pageContext.request.contextPath}/regionAction_importXls.action',  
+            name: 'myFile',
+            onComplete: function(data) {
+            	if(data == '1'){
+            		//上传成功
+            		$.messager.alert("提示信息","区域数据导入成功！","info");
+            	}else{
+            		//失败
+            		$.messager.alert("提示信息","区域数据导入失败！","warning");
+            	}
+            }
+		});
+	});
 </script>	
 </head>
 <body class="easyui-layout" style="visibility:hidden;">

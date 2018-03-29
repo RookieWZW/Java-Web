@@ -43,5 +43,19 @@
 			<result name="home">/index.jsp</result>
 			<result name="login">/login.jsp</result>
 		</action>
+		
+		
+		<action name="staffAction_*" class = "staffAction" method = "{1}">
+			<result name = "list">/WEB-INF/pages/base/staff.jsp</result>
+		</action>
+		
+		
+		<action name="regionAction_*" class="regionAction" method="{1}">
+			<result name="list">/WEB-INF/pages/base/region.jsp</result>
+		</action>
+		
+		<action name="subareaAction_*" class="subareaAction" method="{1}">
+			<result name="list">/WEB-INF/pages/base/subarea.jsp</result>
+		</action>
 	</package>
 </struts>
